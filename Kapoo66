@@ -1,22 +1,21 @@
 getgenv().ConfigsKaitun = {
-    Beta_Fix_Data_Sync = true,
-    NoDeletePlayer = false,
-    ["Block Pet Gift"] = true,
-    Collect_Cooldown = 120,
-    ["Low Cpu"] = true,
-    ["Auto Rejoin"] = true,
-    ["Rejoin When Update"] = true,
+	Beta_Fix_Data_Sync = true,
 
-    ["Auto Trade Pet"] = {
-        ["Enabled"] = false,
-        ["Target"] = { "username1", "username2" },
-        ["Pet To Send"] = {}
-    },
+	NoDeletePlayer = false,
 
-    ["Limit Tree"] = {
-        ["Limit"] = 150,
-        ["Destroy Until"] = 150,
-        ["Safe Tree"] = {
+	["Block Pet Gift"] = true,
+
+	Collect_Cooldown = 120, -- cooldown to collect fruit
+
+	["Low Cpu"] = true,
+	["Auto Rejoin"] = true,
+
+	["Rejoin When Update"] = true,
+	["Limit Tree"] = {
+		["Limit"] = 150,
+		["Destroy Until"] = 150,
+
+		["Safe Tree"] = {
             "Moon Blossom",
             "Bone Blossom",
             "Moon Melon",
@@ -26,6 +25,7 @@ getgenv().ConfigsKaitun = {
             "Elephant Ears",
             "Fossilight",
             "Princess Thorn",
+			-- for the event
             ["Blueberry"] = 15,
             ["Strawberry"] = 15,
             ["Apple"] = 15,
@@ -34,19 +34,25 @@ getgenv().ConfigsKaitun = {
             ["Mango"] = 15,
             ["Tomato"] = 20,
             ["Cactus"] = 15,
-        }
-    },
+		}
+	},
 
-    Seed = {
-        Buy = {
-            Mode = "Auto",
-            Custom = { "Carrot" }
-        },
-        Place = {
-            Mode = "Lock",
-            Select = { "Carrot" },
-            Lock = {"Apple",
+	Seed = {
+		Buy = {
+			Mode = "Auto", -- Custom , Auto
+			Custom = { -- any fruit u need to place
+				"Carrot",
+			}
+		},
+		Place = {
+			Mode = "Lock", -- Select , Lock
+			Select = {
+				"Carrot"
+			},
+			Lock = {
+				"Apple",
 "Avocado",
+"Bamboo",
 "Banana",
 "Blood Banana",
 "Blueberry",
@@ -274,108 +280,185 @@ getgenv().ConfigsKaitun = {
 "Tranquil Bloom",
 "Zenflare",
 "Zen Rocks"
+
+			}
+		}
+	},
+
+	["Seed Pack"] = {
+		Locked = {
+"Skyroot Chest",
+"Sprout Seed Pack"
+		}
+	},
+
+	Events = {
+		["Bean Event"] = {
+			Minimum_Money = 10_000_000, -- minimum money to start play this event
+		},
+		MaxMoney_Restocks = 1_000_000_000,
+		Shop = { -- un comment to buy
+			"Sprout Seed Pack",
+			"Sprout Egg",
+			-- "Mandrake",
+			"Silver Fertilizer",
+			-- "Canary Melon",
+			-- "Amberheart",
+			["Spriggan"] = 8,
+			-- Friend Shop
+			"Skyroot Chest",
+			"Pet Shard GiantBean",
+		},
+		["Traveling Shop"] = {
+			"Bee Egg",
+		},
+		Craft = {
+			"Anti Bee Egg",
+			"Pet Shard GiantBean",
+			"Sprout Egg",
+		},
+		Start_Do_Honey = 2_000_000 -- start trade fruit for honey at money
+	},
+
+	Gear = {
+		Buy = { 
+			"Master Sprinkler",
+			"Godly Sprinkler",
+			"Advanced Sprinkler",
+			"Basic Sprinkler",
+			"Lightning Rod",
+			"Level Up Lollipop",
+			"Medium Treat",
+			"Medium Toy",
+		},
+		Lock = {
+			"Master Sprinkler",
+			"Godly Sprinkler",
+			"Advanced Sprinkler",
+			"Basic Sprinkler",
+			"Lightning Rod",
+		},
+	},
+
+	Eggs = {
+		Place = {
+			"Sprout Egg",
+		},
+		Buy = {
+			"Bee Egg",
+			"Oasis Egg",
+			"Paradise Egg",
+			"Anti Bee Egg",
+			"Night Egg",
+			"Rare Summer Egg",
+			"Bug Egg",
+			"Mythical Egg",
+			"Uncommon Egg",
+			"Common Egg",
+		}
+	},
+
+	Pets = {
+		["Auto Feed"] = true,
+
+		["Start Delete Pet At"] = 85,
+		["Upgrade Slot"] = {
+			["Pet"] = {
+				
+			},
+			["Limit Upgrade"] = 2, -- max is 5 (more than or lower than 1 will do nothing)
+			["Equip When Done"] = {
+			},
+		},
+		Unfavorite_AllPet = false,
+		Favorite_LockedPet = true,
+		Locked_Pet_Age = 60, -- pet that age > 60 will lock
+		Locked = {
+			"Griffin",
+			"Golden Goose",
+			"French Fry Ferret",
+			"Spaghetti Sloth",
+			"Corrupted Kitsune",
+			"Raiju",
+			"Koi",
+			"Tanuki",
+			"Tanchozuru",
+			"Kappa",
+			"Kitsune",
+			"Dilophosaurus",
+			"Moon Cat",
+			"Capybara",
+			"Spinosaurus",
+			"Bear Bee",
+			"T-Rex",
+			"Brontosaurus",
+			"Disco Bee",
+			"Butterfly",
+			"Queen Bee",
+			"Dragonfly",
+			"Raccoon",
+			"Fennec Fox",
+			"Mimic Octopus",
+			"Red Fox",
+			"Blood Owl",
+			["Starfish"] = 10,
+		},
+		LockPet_Weight = 7, -- if Weight >= 10 they will locked
+		Ignore_Pet_Weight = {
+			"NAME oF PET THAT U DONT NEED LOCK",
+		},
+		Instant_Sell = {
+			"Bunny", 
+"Dog", 
+"Golden Lab", 
+"Starfish", 
+"Crab", 
+"Golem",
+"Seagull", 
+"Dairy Cow", 
+"Jackalope", 
+"Seedling",
+"Elk",
+"Mandrake",
+"Capybara"
+		}
+	},
+
+	Webhook = {
+		UrlPet = "https://discord.com/api/webhooks/1409168762384416898/2HOS21zd1gAy1c1FMCYz-P1Q1AcynX5JSAYcPPsvd10Jc4FgfssapkNc-C6jsQlNpB52",
+		UrlSeed = "xxx",
+		PcName = "PORISK",
+
+		Mention = "1248675591910195392", -- discord id
+
+		Noti = {
+			Seeds = {
+				"Sunflower",
+				"Dragon Pepper",
+				"Elephant Ears",
+			},
+			SeedPack = {
+				"Idk"
+			},
+			Pets = {
+				"Golden Goose",
+				"French Fry Ferret",
+				"Corrupted Kitsune",
+				"Kitsune",
+				"Spinosaurus",
+				"T-Rex",
+				"Disco Bee",
+				"Butterfly",
+				"Mimic Octopus",
+				"Queen Bee",
+				"Fennec Fox",
+				"Dragonfly",
+				"Raccoon",
+				"Red Fox",
+			},
+			Pet_Weight_Noti = true,
+		}
+	},
 }
-        }
-    },
-
-    ["Seed Pack"] = {
-        Locked = { "Sprout Seed Pack" }
-    },
-
-    Events = {
-        ["Bean Event"] = { Minimum_Money = 10_000_000 },
-        MaxMoney_Restocks = 10_000_000_000,
-        Shop = {
-            "Sprout Seed Pack",
-            "Sprout Egg",
-            "Silver Fertilizer",
-            ["Spriggan"] = 8,
-            "Skyroot Chest",
-            "Pet Shard GiantBean",
-        },
-        ["Traveling Shop"] = { "Bee Egg" },
-        Craft = { "Anti Bee Egg", "Pet Shard GiantBean", "Sprout Egg" },
-        Start_Do_Honey = 2_000_000
-    },
-
-    Gear = {
-        Buy = {
-            "Grandmaster Sprinkler",
-            "Master Sprinkler",
-            "Godly Sprinkler",
-            "Advanced Sprinkler",
-            "Basic Sprinkler",
-            "Lightning Rod",
-            "Level Up Lollipop",
-            "Medium Treat",
-            "Medium Toy",
-        },
-        Lock = {
-            "Grandmaster Sprinkler",
-            "Master Sprinkler",
-            "Godly Sprinkler",
-            "Advanced Sprinkler",
-            "Basic Sprinkler",
-            "Lightning Rod",
-        },
-    },
-
-    Eggs = {
-        Place = { "Sprout Egg" },
-        Buy = {
-            "Bee Egg", "Oasis Egg", "Paradise Egg", "Anti Bee Egg",
-            "Night Egg", "Rare Summer Egg", "Bug Egg", "Mythical Egg",
-            "Uncommon Egg", "Common Egg",
-        }
-    },
-
-    Pets = {
-        ["Auto Feed"] = true,
-        ["Start Delete Pet At"] = 85,
-        ["Upgrade Slot"] = {
-            ["Pet"] = {},
-            ["Equip When Done"] = {},
-        },
-        Unfavorite_AllPet = false,
-        Favorite_LockedPet = true,
-        Locked_Pet_Age = 60,
-        Locked = {
-            "Griffin", "Golden Goose", "French Fry Ferret",
-            "Spaghetti Sloth", "Corrupted Kitsune", "Raiju",
-            "Koi", "Tanuki", "Tanchozuru", "Kappa",
-            "Kitsune", "Dilophosaurus", "Moon Cat", "Capybara",
-            "Spinosaurus", "Bear Bee", "T-Rex", "Brontosaurus",
-            "Disco Bee", "Butterfly", "Queen Bee", "Dragonfly",
-            "Raccoon", "Fennec Fox", "Mimic Octopus", "Red Fox",
-            "Blood Owl", ["Starfish"] = 10,
-        },
-        LockPet_Weight = 7,
-        Ignore_Pet_Weight = { "NAME oF PET THAT U DONT NEED LOCK" },
-        Instant_Sell = {
-            "Bunny", "Dog", "Golem", "Golden Lab", "Starfish",
-            "Crab", "Seagull", "Dairy Cow", "Jackalope",
-            "Seedling", "Elk", "Mandrake", "Capybara"
-        }
-    },
-
-    Webhook = {
-        UrlPet = "https://discord.com/api/webhooks/1409168762384416898/2HOS21zd1gAy1c1FMCYz-P1Q1AcynX5JSAYcPPsvd10Jc4FgfssapkNc-C6jsQlNpB52",
-        UrlSeed = "xxx",
-        PcName = "xxx",
-        Mention = "838442367585091585",
-        Noti = {
-            Seeds = { "Sunflower", "Dragon Pepper", "Elephant Ears" },
-            SeedPack = { "Idk" },
-            Pets = {
-                "Golden Goose", "French Fry Ferret", "Corrupted Kitsune",
-                "Kitsune", "Spinosaurus", "T-Rex", "Disco Bee",
-                "Butterfly", "Mimic Octopus", "Queen Bee",
-                "Fennec Fox", "Dragonfly", "Raccoon", "Red Fox",
-            },
-            Pet_Weight_Noti = true,
-        }
-    },
-}
-
 License = "mlUTN09d2Rp3fWP5cNt5K5ezlyjOy8ld"
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Real-Aya/Loader/main/Init.lua'))()
