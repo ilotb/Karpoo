@@ -51,6 +51,7 @@ getgenv().ConfigsKaitun = {
 			},
 			Lock = {
 				"Apple",
+"Bamboo",
 "Avocado",
 "Banana",
 "Blood Banana",
@@ -341,7 +342,7 @@ getgenv().ConfigsKaitun = {
 
 	Eggs = {
 		Place = {
-		
+		"Sprout Egg"
 		},
 		Buy = {
 			"Bee Egg",
@@ -409,6 +410,7 @@ getgenv().ConfigsKaitun = {
 		Instant_Sell = {
 			"Bunny", 
 "Dog", 
+"Golem",
 "Golden Lab", 
 "Starfish", 
 "Crab", 
@@ -459,4 +461,4 @@ getgenv().ConfigsKaitun = {
 	},
 }
 License = "mlUTN09d2Rp3fWP5cNt5K5ezlyjOy8ld"
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Real-Aya/Loader/main/Init.lua'))()",
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Real-Aya/Loader/main/Init.lua'))()
