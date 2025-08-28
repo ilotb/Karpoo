@@ -11,9 +11,21 @@ getgenv().ConfigsKaitun = {
 	["Auto Rejoin"] = true,
 
 	["Rejoin When Update"] = true,
+
+	["Auto Trade Pet"] = { -- not done yet bro dont use
+		["Enabled"] = false, 
+		["Target"] =  { -- multi users
+			"username1",
+			"username2",
+		},
+		["Pet To Send"] = {
+			
+		}
+	},
+
 	["Limit Tree"] = {
-		["Limit"] = 150,
-		["Destroy Until"] = 150,
+		["Limit"] = 200,
+		["Destroy Until"] = 200,
 
 		["Safe Tree"] = {
             "Moon Blossom",
@@ -51,7 +63,6 @@ getgenv().ConfigsKaitun = {
 			},
 			Lock = {
 				"Apple",
-"Bamboo",
 "Avocado",
 "Banana",
 "Blood Banana",
@@ -279,21 +290,22 @@ getgenv().ConfigsKaitun = {
 "Taro Flower",
 "Tranquil Bloom",
 "Zenflare",
-"Zen Rocks"
+"Zen Rocks",
+"Bamboo"
+
 			}
 		}
 	},
 
 	["Seed Pack"] = {
 		Locked = {
-		"Sprout Seed Pack",
-"Skyroot Chest"
+		"Sprout Seed Pack"
 		}
 	},
 
 	Events = {
 		["Bean Event"] = {
-			Minimum_Money = 1_000_000_000, -- minimum money to start play this event
+			Minimum_Money = 10_000_000, -- minimum money to start play this event
 		},
 		MaxMoney_Restocks = 10_000_000_000,
 		Shop = { -- un comment to buy
@@ -336,13 +348,25 @@ getgenv().ConfigsKaitun = {
 			"Advanced Sprinkler",
 			"Basic Sprinkler",
 			"Lightning Rod",
-			"GrandMaster Sprinkler"
 		},
 	},
 
 	Eggs = {
 		Place = {
-		"Sprout Egg"
+			"Sprout Egg",
+			"Gourmet Egg",
+			"Zen Egg",
+			"Primal Egg",
+			"Dinosaur Egg",
+			"Oasis Egg",
+			"Anti Bee Egg",
+			"Night Egg",
+			"Bug Egg",
+			"Paradise Egg",
+			"Bee Egg",
+			"Rare Summer Egg",
+			"Mythical Egg",
+			"Common Egg",
 		},
 		Buy = {
 			"Bee Egg",
@@ -361,13 +385,12 @@ getgenv().ConfigsKaitun = {
 	Pets = {
 		["Auto Feed"] = true,
 
-		["Start Delete Pet At"] = 40,
+		["Start Delete Pet At"] = ,85,
 		["Upgrade Slot"] = {
 			["Pet"] = {
-			
-			},
-			["Limit Upgrade"] = 2, -- max is 5 (more than or lower than 1 will do nothing)
+				
 			["Equip When Done"] = {
+		
 			},
 		},
 		Unfavorite_AllPet = false,
@@ -408,7 +431,7 @@ getgenv().ConfigsKaitun = {
 			"NAME oF PET THAT U DONT NEED LOCK",
 		},
 		Instant_Sell = {
-			"Bunny", 
+				"Bunny", 
 "Dog", 
 "Golem",
 "Golden Lab", 
@@ -425,11 +448,11 @@ getgenv().ConfigsKaitun = {
 	},
 
 	Webhook = {
-		UrlPet = "https://discord.com/api/webhooks/1409168762384416898/2HOS21zd1gAy1c1FMCYz-P1Q1AcynX5JSAYcPPsvd10Jc4FgfssapkNc-C6jsQlNpB52",
+		UrlPet = "xxx",
 		UrlSeed = "xxx",
-		PcName = "PORISK",
+		PcName = "xxx",
 
-		Mention = "1248675591910195392", -- discord id
+		Mention = "", -- discord id
 
 		Noti = {
 			Seeds = {
