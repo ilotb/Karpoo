@@ -24,8 +24,8 @@ getgenv().ConfigsKaitun = {
 	},
 
 	["Limit Tree"] = {
-		["Limit"] = 200,
-		["Destroy Until"] = 200,
+		["Limit"] = 150,
+		["Destroy Until"] = 150,
 
 		["Safe Tree"] = {
             "Moon Blossom",
@@ -62,7 +62,8 @@ getgenv().ConfigsKaitun = {
 				"Carrot"
 			},
 			Lock = {
-				"Apple",
+"Bamboo",
+		"Apple",
 "Avocado",
 "Banana",
 "Blood Banana",
@@ -290,8 +291,7 @@ getgenv().ConfigsKaitun = {
 "Taro Flower",
 "Tranquil Bloom",
 "Zenflare",
-"Zen Rocks",
-"Bamboo"
+"Zen Rocks"
 
 			}
 		}
@@ -299,7 +299,7 @@ getgenv().ConfigsKaitun = {
 
 	["Seed Pack"] = {
 		Locked = {
-		"Sprout Seed Pack"
+"Sprout Seed Pack"
 		}
 	},
 
@@ -333,6 +333,7 @@ getgenv().ConfigsKaitun = {
 
 	Gear = {
 		Buy = { 
+"Grandmaster Sprinkler",
 			"Master Sprinkler",
 			"Godly Sprinkler",
 			"Advanced Sprinkler",
@@ -343,6 +344,7 @@ getgenv().ConfigsKaitun = {
 			"Medium Toy",
 		},
 		Lock = {
+"Grandmaster",
 			"Master Sprinkler",
 			"Godly Sprinkler",
 			"Advanced Sprinkler",
@@ -354,19 +356,6 @@ getgenv().ConfigsKaitun = {
 	Eggs = {
 		Place = {
 			"Sprout Egg",
-			"Gourmet Egg",
-			"Zen Egg",
-			"Primal Egg",
-			"Dinosaur Egg",
-			"Oasis Egg",
-			"Anti Bee Egg",
-			"Night Egg",
-			"Bug Egg",
-			"Paradise Egg",
-			"Bee Egg",
-			"Rare Summer Egg",
-			"Mythical Egg",
-			"Common Egg",
 		},
 		Buy = {
 			"Bee Egg",
@@ -484,4 +473,5 @@ getgenv().ConfigsKaitun = {
 	},
 }
 License = "mlUTN09d2Rp3fWP5cNt5K5ezlyjOy8ld"
+
 loadstring(game:HttpGet('https://raw.githubusercontent.com/Real-Aya/Loader/main/Init.lua'))()
