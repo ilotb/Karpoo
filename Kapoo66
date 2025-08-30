@@ -197,7 +197,6 @@ getgenv().ConfigsKaitun = {
 "Purple Cabbage",
 "Rhubarb",
 "Taro Flower",
-"Tomato",  <-- Note: I included original but Tomato should be removed per list
 "Violet Corn",
 "Wild Carrot",
 "Amberheart",
