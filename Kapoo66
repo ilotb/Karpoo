@@ -385,6 +385,7 @@ getgenv().ConfigsKaitun = {
 			"NAME oF PET THAT U DONT NEED LOCK",
 		},
 		Instant_Sell = {
+"Bunny",
 "Ladybug",
 "Kodama",
 "Pixie",
