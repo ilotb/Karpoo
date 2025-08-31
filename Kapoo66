@@ -326,7 +326,8 @@ getgenv().ConfigsKaitun = {
 
 	Eggs = {
 		Place = {
-			"Enchanted Egg"
+			"Enchanted Egg",
+"Sprout Egg"
 			
 		}
 	},
