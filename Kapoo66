@@ -338,14 +338,19 @@ getgenv().ConfigsKaitun = {
 	Pets = {
 		["Auto Feed"] = true,
 
-		["Start Delete Pet At"] = 85,
+		MutationPet = {
+			["PET NAME"] = { "Glimmering","... any other" }
+		},
+
+		["Start Delete Pet At"] = 40,
 		["Upgrade Slot"] = {
+			["Little Auto Equip"] = true, -- when it no target pet in list it will equip random/smart before real list have pet
 			["Pet"] = {
-				
+			
 			},
 			["Limit Upgrade"] = 0, -- max is 5 (more than or lower than 1 will do nothing)
 			["Equip When Done"] = {
-["Koi"] = {8, 101, 1},
+				["Koi"] = {8, 101, 1}
 			},
 		},
 		Unfavorite_AllPet = false,
