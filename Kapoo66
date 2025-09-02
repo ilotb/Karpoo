@@ -345,6 +345,7 @@ getgenv().ConfigsKaitun = {
 			},
 			["Limit Upgrade"] = 2, -- max is 5 (more than or lower than 1 will do nothing)
 			["Equip When Done"] = {
+["Koi"] = {8, 100, 1},
 			},
 		},
 		Unfavorite_AllPet = false,
