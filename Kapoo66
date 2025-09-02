@@ -337,7 +337,7 @@ getgenv().ConfigsKaitun = {
 
 	Pets = {
 		["Auto Feed"] = true,
-			},
+		
 		},
 		Unfavorite_AllPet = false,
 		Favorite_LockedPet = true,
