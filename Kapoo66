@@ -1,10 +1,7 @@
 while wait(10) do
 for _, char in pairs(game.Workspace.Characters:GetChildren()) do
-    if char:IsA("Model") then
-        local player = game.Players:FindFirstChild(char.Name)
-        if not player == game.Players.LocalPlayer then
-            char:Destroy()
-        end
+    if char:IsA("Model") and char.Name ~= game.Players.LocalPlayer.Name then
+        char:Destroy()
     end
 end
 for i,v in pairs(game.Workspace:GetChildren()) do
