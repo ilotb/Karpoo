@@ -32,7 +32,7 @@ _G.Logic = {
 _G.Config = {
     ["Version"] = "7", 
     ["Optimize"] = {
-        ["Disabled 3d Render"] = false
+        ["Disabled 3d Render"] = true
     },
     ["Selling"] = {
         ["Delay"] = 10, -- // Type ~ [ Number ] ( Second )
@@ -51,9 +51,9 @@ _G.Config = {
         ["Aura Boat"] = true, -- // Read Logic Config
     },
     ["Web Hook"] = {
-        ["Link Webhook"] = "", -- // Type ~ Link Webhook
-        ["Auto Sending"] = false,
-        ["Delay"] = 30,-- // Type ~ [ Number ] ( Second )
+        ["Link Webhook"] = "https://discord.com/api/webhooks/1409168762384416898/2HOS21zd1gAy1c1FMCYz-P1Q1AcynX5JSAYcPPsvd10Jc4FgfssapkNc-C6jsQlNpB52", -- // Type ~ Link Webhook
+        ["Auto Sending"] = true,
+        ["Delay"] = 300,-- // Type ~ [ Number ] ( Second )
     },
     ["Bobber"] = {
         ["Auto Buying"] = true,
