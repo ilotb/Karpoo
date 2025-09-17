@@ -30,7 +30,7 @@ _G.Logic = {
 }
 
 _G.Config = {
-    ["Version"] = "6", 
+    ["Version"] = "7", 
     ["Optimize"] = {
         ["Disabled 3d Render"] = false
     },
@@ -42,14 +42,18 @@ _G.Config = {
         ["Smart Calculator Delay"] = true,
         ["Perfect Cast"] = true,
     },
+    ["Favorite"] = {
+        ["Allow Doing"] = true,
+        ["Favorite Type"] = {"Mythic", "SECRET"},
+    },
     ["Doing Quest"] = {
         ["Auto Ghostfinn Rod"] = true, -- // Read Logic Config
         ["Aura Boat"] = true, -- // Read Logic Config
     },
     ["Web Hook"] = {
-        ["Link Webhook"] = "https://discord.com/api/webhooks/1409168762384416898/2HOS21zd1gAy1c1FMCYz-P1Q1AcynX5JSAYcPPsvd10Jc4FgfssapkNc-C6jsQlNpB52", -- // Type ~ Link Webhook
-        ["Auto Sending"] = true,
-        ["Delay"] = 100,-- // Type ~ [ Number ] ( Second )
+        ["Link Webhook"] = "", -- // Type ~ Link Webhook
+        ["Auto Sending"] = false,
+        ["Delay"] = 30,-- // Type ~ [ Number ] ( Second )
     },
     ["Bobber"] = {
         ["Auto Buying"] = true,
@@ -74,5 +78,4 @@ _G.Config = {
         "Angler Rod",
     },
 }
-
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e1d42b5f3f331877f508300cbe710d37.lua"))()
