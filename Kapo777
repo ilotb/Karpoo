@@ -1,9 +1,9 @@
-
 if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
+
 
 _G.RAM = {
     ["Roblox Account Manager"] = {
-        ["Auto Sending"] = true,
+        ["Auto Sending"] = false,
         ["Blacklist Rod"] = {"Starter Rod","Luck Rod","Ice Rod","Lucky Rod","Midnight Rod"},
         ["Delay Log"] = 5,
     },
@@ -12,12 +12,14 @@ _G.RAM = {
 _G.Logic = {
     ["Data"] = {
         ["Ghostfinn Rod"] = {
+            ["Allow Doing"] = true,
             ["Doing After"] = {
                 ["Level"] = 25, -- // Type ~ [ Requirement Level ]
                 ["Rod"] = "Chrome Rod" -- // Type ~ [ Requirement Rod ]
             },
         },
         ["Aura Boat"] = { 
+            ["Allow Doing"] = false,
             ["Doing After"] = {
                 ["Level"] = 200, -- // Type ~ [ Requirement Level ]
                 ["Rod"] = "Ghostfinn Rod" -- // Type ~ [ Requirement Rod ]
@@ -30,7 +32,7 @@ _G.Logic = {
 }
 
 _G.Config = {
-    ["Version"] = "7", 
+    ["Version"] = "8", 
     ["Optimize"] = {
         ["Disabled 3d Render"] = true
     },
@@ -53,7 +55,7 @@ _G.Config = {
     ["Web Hook"] = {
         ["Link Webhook"] = "https://discord.com/api/webhooks/1409168762384416898/2HOS21zd1gAy1c1FMCYz-P1Q1AcynX5JSAYcPPsvd10Jc4FgfssapkNc-C6jsQlNpB52", -- // Type ~ Link Webhook
         ["Auto Sending"] = true,
-        ["Delay"] = 300,-- // Type ~ [ Number ] ( Second )
+        ["Delay"] = 1000,-- // Type ~ [ Number ] ( Second )
     },
     ["Bobber"] = {
         ["Auto Buying"] = true,
@@ -78,4 +80,5 @@ _G.Config = {
         "Angler Rod",
     },
 }
+
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e1d42b5f3f331877f508300cbe710d37.lua"))()
