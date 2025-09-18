@@ -53,7 +53,7 @@ _G.Config = {
         ["Aura Boat"] = true, -- // Read Logic Config
     },
     ["Web Hook"] = {
-        ["Link Webhook"] = "https://discord.com/api/webhooks/1409168762384416898/2HOS21zd1gAy1c1FMCYz-P1Q1AcynX5JSAYcPPsvd10Jc4FgfssapkNc-C6jsQlNpB52", -- // Type ~ Link Webhook
+        ["Link Webhook"] = "https://discord.com/api/webhooks/1247091444968198237/0NzN-veGC1YYdmOb_2bxepyO5IFEL_ycPrBTSMhplxHg1fNlCOVz4P-8Dz5rywf6Hu77", -- // Type ~ Link Webhook
         ["Auto Sending"] = true,
         ["Delay"] = 1000,-- // Type ~ [ Number ] ( Second )
     },
