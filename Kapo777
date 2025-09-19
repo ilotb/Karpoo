@@ -19,7 +19,7 @@ _G.Logic = {
             },
         },
         ["Aura Boat"] = { 
-            ["Allow Doing"] = false,
+            ["Allow Doing"] = true,
             ["Doing After"] = {
                 ["Level"] = 200, -- // Type ~ [ Requirement Level ]
                 ["Rod"] = "Ghostfinn Rod" -- // Type ~ [ Requirement Rod ]
