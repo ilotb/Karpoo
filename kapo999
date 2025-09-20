@@ -1,4 +1,1 @@
-if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
-_G.LoaderGame = "Fish it | Normal Mode"
-script_key="njJRMLIybWqzwfjAQaNkaiUjcLNxXiXF";
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/1c0bde26fd6784a7ad9eae18839833d8.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()
