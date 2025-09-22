@@ -1,9 +1,6 @@
 while wait(10) do
-for _, char in pairs(game.Workspace.Characters:GetChildren()) do
+for _, char in pairs(game.Workspace:GetChildren()) do
     if char:IsA("Model") and char.Name ~= game.Players.LocalPlayer.Name then
         char:Destroy()
     end
-end
-for i,v in pairs(game.Workspace:GetChildren()) do
-if v.Name == "CosmeticFolder" then v:Destroy() end end
-end
+end end
