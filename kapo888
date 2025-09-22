@@ -8,7 +8,7 @@ _G.RAM = {
 
 _G.Loader = {
 	["Version"] = "2",
-	["Lock Fps"] = 60, -- Recommend 10 - 15 Fps ++
+	["Lock Fps"] = 15, -- Recommend 10 - 15 Fps ++
 	["Allow Reconnect"] = true,
 	["Manager Fishing"] = {
 		["Fishing Location"] = {
