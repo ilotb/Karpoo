@@ -1,14 +1,14 @@
 
-_G.SafeMode = true
-_G.RAM = { 	
+_G.RAM = {
 	["Roblox Account Manager"] = {
 		["Auto Sending"] = false,
 		["Delay Log"] = 5,
 	},
 }
+
 _G.Loader = {
-	["Version"] = "1",
-	["Lock Fps"] = 30, -- Recommend 10 - 15 Fps ++
+	["Version"] = "2",
+	["Lock Fps"] = 15, -- Recommend 10 - 15 Fps ++
 	["Allow Reconnect"] = true,
 	["Manager Fishing"] = {
 		["Fishing Location"] = {
@@ -49,14 +49,6 @@ _G.Loader = {
 		["Effect Luck"] = {
 			["Allow Buying"] = true,
 			["Minimum Money"] = 50000,
-		},
-		["Aurora Borealis"] = {
-			["Auto Using"] = false,
-			["Allow Purchase"] = false,
-			["Allow Using Sundial Totem"] = false,
-			["Allow Buying Aurora Totem When"] = { 
-				["Money"] = 3500000,
-			},
 		},
 		["Allow Equip"] = {
 			"Carbon Rod",
@@ -120,6 +112,13 @@ _G.Loader = {
 				["Money"] = 5050000,
 			},
 		},
+		["Rod Of The Zenith"] = {
+			["Enable"] = true,
+			["Doing After"] = {
+				["Level"] = 1000,
+				["Money"] = 10000000,
+			},
+		},
 		["Duskwire"] = {
 			["Enable"] = true,
 			["Doing After"] = {
@@ -142,7 +141,7 @@ _G.Loader = {
 			},
 		},
 		["Heaven's Rod"] = {
-			["Enable"] = true,
+			["Enable"] = false,
 			["Doing After"] = {
 				["Level"] = 1000,
 				["Money"] = 5500000,
@@ -150,4 +149,5 @@ _G.Loader = {
 		},
 	},
 }
+
 loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/1ceecb339d18bc3f94b0aa20f2146c30.lua"))()
