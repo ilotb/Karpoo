@@ -1,7 +1,1 @@
-while wait(10) do
-for _, char in pairs(game.Workspace:GetChildren()) do
-    if char:IsA("Model") and char.Name ~= game.Players.LocalPlayer.Name then
-        char:Destroy()
-    end
-end 
-end
+
