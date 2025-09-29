@@ -1,7 +1,8 @@
-for i,v in pairs(game.Workspace.Characters:GetChildren()) do
-if not (v.Name == game.Players.LocalPlayer.Name) then
-v:Destroy() end end
 workspace.CosmeticFolder:Destroy()
 if setfpscap then
     setfpscap(15) -- Uncapped FPS for maximum frame rate
 end
+while wait(10) do
+for i,v in pairs(game.Workspace.Characters:GetChildren()) do
+if not (v.Name == game.Players.LocalPlayer.Name) then
+v:Destroy() end end end
