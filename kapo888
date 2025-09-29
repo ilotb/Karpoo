@@ -1,153 +1,84 @@
+if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
+
 
 _G.RAM = {
-	["Roblox Account Manager"] = {
-		["Auto Sending"] = false,
-		["Delay Log"] = 5,
-	},
+    ["Roblox Account Manager"] = {
+        ["Auto Sending"] = false,
+        ["Blacklist Rod"] = {"Starter Rod","Luck Rod","Ice Rod","Lucky Rod","Midnight Rod"},
+        ["Delay Log"] = 5,
+    },
 }
 
-_G.Loader = {
-	["Version"] = "2",
-	["Lock Fps"] = 15, -- Recommend 10 - 15 Fps ++
-	["Allow Reconnect"] = true,
-	["Manager Fishing"] = {
-		["Fishing Location"] = {
-			["Main Position"] = CFrame.new(-13887.3965, -11048.6885, 350.285706, 0.948456287, 1.08180259e-07, 0.316907942, -1.06977055e-07, 1, -2.11960565e-08, -0.316907942, -1.37983438e-08, 0.948456287) * CFrame.new(0, 0, 5),
-		},
-		["Level Location"] = {
-			["Allow Doing When"] = "Ethereal Prism Rod",
-			["Level Position"] = CFrame.new(-13887.3965, -11048.6885, 350.285706, 0.948456287, 1.08180259e-07, 0.316907942, -1.06977055e-07, 1, -2.11960565e-08, -0.316907942, -1.37983438e-08, 0.948456287) * CFrame.new(0, 0, -5),
-		},
-		["Sell Setting"] = {
-			["Allow Sell Event Fish"] = true,
-			["Allow Sell Exotic Fish"] = true,
-			["Allow Sell Mythical Fish"] = true,
-			["Allow Sell Legendary Fish"] = true,
-			["Allow Sell Secret Fish"] = false,
-		},
-	},
-	["Manager Ping"] = { 
-		["Enable"] = true,
-		["Select Type"] = "Rejoin",
-		["Max Ping"] = 20000,
-	}, 
-	["Manager Nuke"] = { 
-		["Enable"] = true,
-		["Select Type"] = "Normal Using",
-	}, 
-	["Manager Enchant"] = {
-		["Enable"] = true,
-		["Minimum Money"] = 100000,
-		["Select Type Enchant"] = {
-			["Aurora Rod"] = {"Hasty","Clever"},
-			["Poseidon Rod"] = {"Hasty"},
-			["Ethereal Prism Rod"] = {"Clever"},
-			["Great Rod of Oscar"] = {"Clever"},
-		},
-	},  
-	["Manager Doing"] = {
-		["Effect Luck"] = {
-			["Allow Buying"] = true,
-			["Minimum Money"] = 50000,
-		},
-		["Allow Equip"] = {
-			"Carbon Rod",
-			"Rapid Rod",
-			"Aurora Rod",
-			"Poseidon Rod",
-			"Ethereal Prism Rod",
-			"Great Rod of Oscar",
-		},
-		["Allow Buying"] = {
-			["Data"] = {
-				"Firework Rod", "Rod Of The Zenith", "Wicked Fang Rod",
-				"Ethereal Prism Rod", "Zeus Rod", "Treasure Rod",
-				"Frog Rod", "The Boom Ball", "Avalanche Rod",
-				"Summit Rod", "Lucky Rod", 
-				"Destiny Rod", "Cerulean Fang Rod", "Azure Of Lagoon",
-				"Arctic Rod", "Tempest Rod", "Leviathan's Fang Rod",
-				"Heaven's Rod", "Paper Fan Rod", "Abyssal Specter Rod",
-				"Aurora Rod", "Verdant Shear Rod",
-				"Rapid Rod", "Fungal Rod", "Fortune Rod",
-				"Mythical Rod", "Magnet Rod", "Rainbow Cluster Rod",
-				"Scurvy Rod", "Nocturnal Rod",
-				"Blazebringer Rod", "Free Spirit Rod", "Plastic Rod",
-				"Midas Rod", "Reinforced Rod", "Depthseeker Rod",
-				"Sunken Rod", "Great Dreamer Rod", "Seraphic Rod",
-				"Kings Rod", "Crystallized Rod", "Great Rod of Oscar",
-				"Champions Rod", "Challenger's Rod", "Carbon Rod",
-				"Kraken Rod", "Training Rod", "Volcanic Rod",
-				"Fast Rod", "No-Life Rod", "Scarlet Spincaster Rod",
-				"Trident Rod", "Magma Rod", "Frostbane Rod",
-				"Merchant Rod", "Wildflower Rod", "Poseidon Rod",
-				"Carrot Rod", "Phoenix Rod", "Steady Rod",
-				"Stone Rod", "Firefly Rod", "Long Rod",
-				"Luminescent Oath"
-			},
-			["Buying After"] = { 
-				["Level"] = 1000,
-			},
-		},
-		["Default Buying"] = {
-			["Carbon Rod"] = false,
-			["Rapid Rod"] = true,
-			["Aurora Rod"] = true,
-			["Kraken Rod"] = false,
-			["Poseidon Rod"] = true,
-			["Ethereal Prism Rod"] = true,
-			["Great Rod of Oscar"] = true,
-		},
-		-- // Quest Rod
-		["Leviathan's Fang Rod"] = {
-			["Enable"] = true,
-			["Doing After"] = {
-				["Level"] = 500,
-				["Money"] = 1200000,
-			},
-		},
-		["Rod Of The Forgotten Fang"] = {
-			["Enable"] = true,
-			["Doing After"] = {
-				["Level"] = 1000,
-				["Money"] = 5050000,
-			},
-		},
-		["Rod Of The Zenith"] = {
-			["Enable"] = true,
-			["Doing After"] = {
-				["Level"] = 1000,
-				["Money"] = 10000000,
-			},
-		},
-		["Duskwire"] = {
-			["Enable"] = true,
-			["Doing After"] = {
-				["Level"] = 1000,
-				["Money"] = 7500000,
-			},
-		},
-		["Rod Of The Eternal King"] = {
-			["Enable"] = true,
-			["Doing After"] = {
-				["Level"] = 1000,
-				["Money"] = 500000,
-			},
-		},
-		["Magma Rod"] = {
-			["Enable"] = true,
-			["Doing After"] = {
-				["Level"] = 1000,
-				["Money"] = 10000,
-			},
-		},
-		["Heaven's Rod"] = {
-			["Enable"] = false,
-			["Doing After"] = {
-				["Level"] = 1000,
-				["Money"] = 5500000,
-			},
-		},
-	},
+_G.Logic = {
+    ["Data"] = {
+        ["Ghostfinn Rod"] = {
+            ["Allow Doing"] = true,
+            ["Doing After"] = {
+                ["Level"] = 25, -- // Type ~ [ Requirement Level ]
+                ["Rod"] = "Chrome Rod" -- // Type ~ [ Requirement Rod ]
+            },
+        },
+        ["Aura Boat"] = { 
+            ["Allow Doing"] = false,
+            ["Doing After"] = {
+                ["Level"] = 200, -- // Type ~ [ Requirement Level ]
+                ["Rod"] = "Ghostfinn Rod" -- // Type ~ [ Requirement Rod ]
+            },
+        },
+        ["Main Location"] = { -- // Type ~ [ CFrame ] Kohana Volcano
+            ["Data CFrame"] = CFrame.new(-628.519409, 20.601511, 69.7417526, -0.99799186, 3.05362136e-08, -0.0633425638, 2.74305378e-08, 1, 4.98994943e-08, 0.0633425638, 4.80617679e-08, -0.99799186),
+        },
+    },
 }
 
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/1ceecb339d18bc3f94b0aa20f2146c30.lua"))()
+_G.Config = {
+    ["Version"] = "8", 
+    ["Optimize"] = {
+        ["Disabled 3d Render"] = false
+    },
+    ["Selling"] = {
+        ["Delay"] = 10, -- // Type ~ [ Number ] ( Second )
+        ["Auto Sell"] = true,
+    },
+    ["Fishing"] = {
+        ["Smart Calculator Delay"] = true,
+        ["Perfect Cast"] = true,
+    },
+    ["Favorite"] = {
+        ["Allow Doing"] = true,
+        ["Favorite Type"] = {"Mythic", "SECRET"},
+    },
+    ["Doing Quest"] = {
+        ["Auto Ghostfinn Rod"] = true, -- // Read Logic Config
+        ["Aura Boat"] = false, -- // Read Logic Config
+    },
+    ["Web Hook"] = {
+        ["Link Webhook"] = "", -- // Type ~ Link Webhook
+        ["Auto Sending"] = false,
+        ["Delay"] = 30,-- // Type ~ [ Number ] ( Second )
+    },
+    ["Bobber"] = {
+        ["Auto Buying"] = true,
+        ["Auto Equip"] = true,
+        ["Bobber List"] = { -- // Type ~ [ Number ] Bait Data
+            ["1"] = "Midnight Bait",
+            ["2"] = "Chroma Bait",
+            ["3"] = "Corrupt Bait",
+            ["4"] = "Dark Matter Bait",
+        },
+    },
+    ["Rod List"] = { -- // Type ~ Rod Data
+        "Luck Rod",
+        "Ice Rod",
+        "Lucky Rod",
+        "Ice Rod",
+        "Midnight Rod",
+        "Steampunk Rod",
+        "Chrome Rod",
+        "Astral Rod",
+        "Ares Rod",
+        "Angler Rod",
+    },
+}
+
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e1d42b5f3f331877f508300cbe710d37.lua"))()
