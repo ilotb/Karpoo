@@ -1,1 +1,3 @@
-
+if setfpscap then
+    setfpscap(15) -- Uncapped FPS for maximum frame rate
+end
