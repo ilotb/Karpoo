@@ -34,7 +34,7 @@ _G.Logic = {
 _G.Config = {
     ["Version"] = "8", 
     ["Optimize"] = {
-        ["Disabled 3d Render"] = false
+        ["Disabled 3d Render"] = true
     },
     ["Selling"] = {
         ["Delay"] = 10, -- // Type ~ [ Number ] ( Second )
@@ -50,21 +50,21 @@ _G.Config = {
     },
     ["Doing Quest"] = {
         ["Auto Ghostfinn Rod"] = true, -- // Read Logic Config
-        ["Aura Boat"] = false, -- // Read Logic Config
+        ["Aura Boat"] = true, -- // Read Logic Config
     },
     ["Web Hook"] = {
-        ["Link Webhook"] = "https://discord.com/api/webhooks/1409168762384416898/2HOS21zd1gAy1c1FMCYz-P1Q1AcynX5JSAYcPPsvd10Jc4FgfssapkNc-C6jsQlNpB52", -- // Type ~ Link Webhook
-        ["Auto Sending"] = true,
+        ["Link Webhook"] = "", -- // Type ~ Link Webhook
+        ["Auto Sending"] = false,
         ["Delay"] = 30,-- // Type ~ [ Number ] ( Second )
     },
     ["Bobber"] = {
         ["Auto Buying"] = true,
         ["Auto Equip"] = true,
         ["Bobber List"] = { -- // Type ~ [ Number ] Bait Data
-            ["1"] = "Midnight Bait",
-            ["2"] = "Chroma Bait",
-            ["3"] = "Corrupt Bait",
-            ["4"] = "Dark Matter Bait",
+           "Midnight Bait",
+            "Chroma Bait",
+            "Corrupt Bait",
+            "Dark Matter Bait",
         },
     },
     ["Rod List"] = { -- // Type ~ Rod Data
@@ -81,4 +81,4 @@ _G.Config = {
     },
 }
 
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/e1d42b5f3f331877f508300cbe710d37.lua"))()
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/b5700cc9630eb5aa7d819e843789f071.lua"))()
