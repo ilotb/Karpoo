@@ -1,8 +1,13 @@
-workspace.CosmeticFolder:Destroy()
-if setfpscap then
-    setfpscap(15) -- Uncapped FPS for maximum frame rate
-end
-while wait(10) do
-for i,v in pairs(game.Workspace.Characters:GetChildren()) do
-if not (v.Name == game.Players.LocalPlayer.Name) then
-v:Destroy() end end end
+
+local player = game:GetService("Players").LocalPlayer
+local vim = game:GetService("VirtualInputManager")
+
+				local x = 450
+				local y = 140
+
+				vim:SendMouseButtonEvent(x,y,0,true,game,0)
+				wait(.5)
+				vim:SendMouseButtonEvent(x,y,0,false,game,0)
+		
+
+	
