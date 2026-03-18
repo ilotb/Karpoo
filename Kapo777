@@ -3,241 +3,68 @@ local char = player.Character or player.CharacterAdded:Wait()
 local hrp = char:WaitForChild("HumanoidRootPart")
 
 local npcFolder = workspace:WaitForChild("NPCs")
-
-local remote = game:GetService("ReplicatedStorage")
-:WaitForChild("CombatSystem")
-:WaitForChild("Remotes")
-:WaitForChild("RequestHit")
-
--- ability remote
-local abilityRemote = game:GetService("ReplicatedStorage")
-:WaitForChild("AbilitySystem")
-:WaitForChild("Remotes")
-:WaitForChild("RequestAbility")
-
 local RunService = game:GetService("RunService")
 
+local level = player.Data.Level
+
+-- ตารางมอนตามเลเวล
+local monsterByLevel = {
+	[0] = {"Thief1","Thief2","Thief3","Thief4","Thief5"},
+	[110] = {"Monkey1","Monkey2","Monkey3","Monkey4","Monkey5"},
+	[300] = {"DesertBandit1","DesertBandit2","DesertBandit3","DesertBandit4","DesertBandit5"},
+    [500] = {"DesertBoss"},
+	[800] = {"FrostRogue1","FrostRogue2","FrostRogue3","FrostRogue4","FrostRogue5"},
+	[1200] = {"SnowBoss"}
+}
+
 local selected = {}
-local farming = false
+local farming = true
 local currentTarget = nil
+local height = 10
 
-local height = 7
 
-local skill1 = false
-local skill2 = false
-
--- GUI
-local gui = Instance.new("ScreenGui",player.PlayerGui)
-gui.ResetOnSpawn = false
-
-local frame = Instance.new("Frame",gui)
-frame.Size = UDim2.new(0,260,0,450)
-frame.Position = UDim2.new(0.05,0,0.25,0)
-frame.BackgroundColor3 = Color3.fromRGB(35,35,35)
-frame.Active = true
-frame.Draggable = true
-
-local title = Instance.new("TextLabel",frame)
-title.Size = UDim2.new(1,0,0,35)
-title.Text = "Monster Autofarm"
-title.TextScaled = true
-title.BackgroundColor3 = Color3.fromRGB(50,50,50)
-
-local scroll = Instance.new("ScrollingFrame",frame)
-scroll.Position = UDim2.new(0,0,0,35)
-scroll.Size = UDim2.new(1,0,0,230)
-scroll.ScrollBarThickness = 6
-scroll.BackgroundColor3 = Color3.fromRGB(30,30,30)
-
-local layout = Instance.new("UIListLayout",scroll)
-layout.Padding = UDim.new(0,2)
-
--- skill buttons
-local skill1Btn = Instance.new("TextButton",frame)
-skill1Btn.Position = UDim2.new(0,5,1,-235)
-skill1Btn.Size = UDim2.new(0.48,0,0,25)
-skill1Btn.Text = "Skill1 OFF"
-skill1Btn.BackgroundColor3 = Color3.fromRGB(80,80,80)
-
-local skill2Btn = Instance.new("TextButton",frame)
-skill2Btn.Position = UDim2.new(0.52,0,1,-235)
-skill2Btn.Size = UDim2.new(0.48,-5,0,25)
-skill2Btn.Text = "Skill2 OFF"
-skill2Btn.BackgroundColor3 = Color3.fromRGB(80,80,80)
-
-local heightPlus = Instance.new("TextButton",frame)
-heightPlus.Position = UDim2.new(0,5,1,-200)
-heightPlus.Size = UDim2.new(0.48,0,0,25)
-heightPlus.Text = "+ Height"
-
-local heightMinus = Instance.new("TextButton",frame)
-heightMinus.Position = UDim2.new(0.52,0,1,-200)
-heightMinus.Size = UDim2.new(0.48,-5,0,25)
-heightMinus.Text = "- Height"
-
-local heightLabel = Instance.new("TextLabel",frame)
-heightLabel.Position = UDim2.new(0,5,1,-170)
-heightLabel.Size = UDim2.new(1,-10,0,25)
-heightLabel.Text = "Height: "..height
-heightLabel.BackgroundColor3 = Color3.fromRGB(40,40,40)
-
-local startBtn = Instance.new("TextButton",frame)
-startBtn.Position = UDim2.new(0,5,1,-130)
-startBtn.Size = UDim2.new(0.48,0,0,30)
-startBtn.Text = "Start"
-startBtn.BackgroundColor3 = Color3.fromRGB(0,170,80)
-
-local stopBtn = Instance.new("TextButton",frame)
-stopBtn.Position = UDim2.new(0.52,0,1,-130)
-stopBtn.Size = UDim2.new(0.48,-5,0,30)
-stopBtn.Text = "Stop"
-stopBtn.BackgroundColor3 = Color3.fromRGB(170,0,0)
-
-local refreshBtn = Instance.new("TextButton",frame)
-refreshBtn.Position = UDim2.new(0,5,1,-90)
-refreshBtn.Size = UDim2.new(1,-10,0,30)
-refreshBtn.Text = "Refresh"
-
-local unselectBtn = Instance.new("TextButton",frame)
-unselectBtn.Position = UDim2.new(0,5,1,-50)
-unselectBtn.Size = UDim2.new(1,-10,0,30)
-unselectBtn.Text = "Unselect All"
-
--- skill toggle
-skill1Btn.MouseButton1Click:Connect(function()
-
-	skill1 = not skill1
-
-	if skill1 then
-		skill1Btn.Text = "Skill1 ON"
-		skill1Btn.BackgroundColor3 = Color3.fromRGB(0,170,80)
-	else
-		skill1Btn.Text = "Skill1 OFF"
-		skill1Btn.BackgroundColor3 = Color3.fromRGB(80,80,80)
-	end
-
-end)
-
-skill2Btn.MouseButton1Click:Connect(function()
-
-	skill2 = not skill2
-
-	if skill2 then
-		skill2Btn.Text = "Skill2 ON"
-		skill2Btn.BackgroundColor3 = Color3.fromRGB(0,170,80)
-	else
-		skill2Btn.Text = "Skill2 OFF"
-		skill2Btn.BackgroundColor3 = Color3.fromRGB(80,80,80)
-	end
-
-end)
-
-heightPlus.MouseButton1Click:Connect(function()
-	height = height + 1
-	heightLabel.Text = "Height: "..height
-end)
-
-heightMinus.MouseButton1Click:Connect(function()
-	height = height - 1
-	heightLabel.Text = "Height: "..height
-end)
-
--- monster list
-local function getMonsters()
-
-	local t = {}
-
-	for _,v in pairs(npcFolder:GetChildren()) do
-		if v:IsA("Model") then
-			table.insert(t,v)
-		end
-	end
-
-	table.sort(t,function(a,b)
-		return a.Name:lower() < b.Name:lower()
-	end)
-
-	return t
-
-end
-
-local function refresh()
-
-	for _,v in pairs(scroll:GetChildren()) do
-		if v:IsA("TextButton") then
-			v:Destroy()
-		end
-	end
-
-	local monsters = getMonsters()
-
-	for _,npc in ipairs(monsters) do
-
-		local b = Instance.new("TextButton")
-		b.Size = UDim2.new(1,-4,0,32)
-		b.Text = npc.Name
-		b.BackgroundColor3 = Color3.fromRGB(60,60,60)
-		b.Parent = scroll
-
-		b.MouseButton1Click:Connect(function()
-
-			if selected[npc.Name] then
-				selected[npc.Name] = nil
-				b.BackgroundColor3 = Color3.fromRGB(60,60,60)
-			else
-				selected[npc.Name] = true
-				b.BackgroundColor3 = Color3.fromRGB(0,170,80)
-			end
-
-		end)
-
-	end
-
-	scroll.CanvasSize = UDim2.new(0,0,0,#monsters*34)
-
-end
-
-refresh()
-
-refreshBtn.MouseButton1Click:Connect(refresh)
-
-unselectBtn.MouseButton1Click:Connect(function()
+local function updateMonsterList()
 
 	selected = {}
 
-	for _,v in pairs(scroll:GetChildren()) do
-		if v:IsA("TextButton") then
-			v.BackgroundColor3 = Color3.fromRGB(60,60,60)
+	local chosenLevel = 0
+
+	for reqLevel,_ in pairs(monsterByLevel) do
+		if level.Value >= reqLevel and reqLevel >= chosenLevel then
+			chosenLevel = reqLevel
 		end
 	end
 
+	for _,name in pairs(monsterByLevel[chosenLevel]) do
+		selected[name] = true
+	end
+
+end
+
+
+updateMonsterList()
+
+level:GetPropertyChangedSignal("Value"):Connect(function()
+	updateMonsterList()
 end)
+
 
 local function getTarget()
 
 	for _,npc in pairs(npcFolder:GetChildren()) do
-
 		if selected[npc.Name] then
 
 			local hum = npc:FindFirstChildOfClass("Humanoid")
+
 			if hum and hum.Health > 0 then
 				return npc
 			end
 
 		end
-
 	end
 
 end
 
-startBtn.MouseButton1Click:Connect(function()
-	farming = true
-end)
-
-stopBtn.MouseButton1Click:Connect(function()
-	farming = false
-	currentTarget = nil
-end)
 
 RunService.Heartbeat:Connect(function()
 
@@ -261,21 +88,9 @@ RunService.Heartbeat:Connect(function()
 
 			hrp.AssemblyLinearVelocity = Vector3.zero
 			hrp.AssemblyAngularVelocity = Vector3.zero
-
-			hrp.CFrame = CFrame.lookAt(pos,head.Position)
-
-			remote:FireServer()
-
-			if skill1 then
-				abilityRemote:FireServer(1)
-			end
-
-			if skill2 then
-				abilityRemote:FireServer(2)
-			end
+			hrp.CFrame = CFrame.lookAt(pos, head.Position)
 
 		end
-
 	end
 
 end)
