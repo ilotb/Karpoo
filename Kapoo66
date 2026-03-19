@@ -1,13 +1,16 @@
+for _, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.SettingsUI.MainFrame.Frame.Content.SettingsTabFrame.Toggle_AutoQuestRepeat.SettingsHolder:GetDescendants()) do
+    if v:IsA("ImageButton") then
+        pcall(function()
+           
+            
+ for _, c in pairs(getconnections(v.Activated)) do
+                c.Function()
+            end
+        
+            
+           
+        end)
+    end
+end
 
-local player = game:GetService("Players").LocalPlayer
-local vim = game:GetService("VirtualInputManager")
-
-				local x = 450
-				local y = 140
-
-				vim:SendMouseButtonEvent(x,y,0,true,game,0)
-				wait(.5)
-				vim:SendMouseButtonEvent(x,y,0,false,game,0)
-		
-
-	
+game:GetService("Players").LocalPlayer.PlayerGui.SettingsUI.MainFrame.Frame.Content.SettingsTabFrame.Toggle_AutoQuestRepeat.SettingsHolder.On
