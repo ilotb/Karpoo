@@ -13,3 +13,5 @@ local args = {
 	"Combat"
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("EquipWeapon"):FireServer(unpack(args))
+
+game:GetService("ReplicatedStorage"):WaitForChild("CombatSystem"):WaitForChild("Remotes"):WaitForChild("RequestHit"):FireServer()
