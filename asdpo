@@ -14,4 +14,4 @@ local args = {
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("EquipWeapon"):FireServer(unpack(args))
 
-game:GetService("ReplicatedStorage"):WaitForChild("CombatSystem"):WaitForChild("Remotes"):WaitForChild("RequestHit"):FireServer()
+getgenv().ClickLoop=false;local v=game:GetService("VirtualInputManager");while getgenv().ClickLoop and task.wait(0.2) do v:SendMouseButtonEvent(500,300,0,true,game,0);task.wait(0.05);v:SendMouseButtonEvent(500,300,0,false,game,0) end
