@@ -1,16 +1,13 @@
-for _, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.SettingsUI.MainFrame.Frame.Content.SettingsTabFrame.Toggle_AutoQuestRepeat.SettingsHolder:GetDescendants()) do
-    if v:IsA("ImageButton") then
-        pcall(function()
-           
-            
- for _, c in pairs(getconnections(v.Activated)) do
-                c.Function()
-            end
-        
-            
-           
-        end)
-    end
-end
+local tabs = {
+    "Toggle_EnableQuestRepeat",
+    "Toggle_AutoQuestRepeat"
+}
 
-game:GetService("Players").LocalPlayer.PlayerGui.SettingsUI.MainFrame.Frame.Content.SettingsTabFrame.Toggle_AutoQuestRepeat.SettingsHolder.On
+local path = game:GetService("Players").LocalPlayer.PlayerGui.SettingsUI.MainFrame.Frame.Content.SettingsTabFrame
+
+for _, name in pairs(tabs) do
+    local btn = path[name].SettingsHolder.On
+    for _, c in pairs(getconnections(btn.Activated)) do
+        pcall(function() c.Function() end)
+    end
+endder.On
