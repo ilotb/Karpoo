@@ -1,0 +1,99 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+-- 🌍 GLOBAL (ไม่มีค่าเริ่มต้นแล้ว)
+getgenv().Settings = {
+    AutoFarm = false,
+    SelectedMonster = nil
+}
+
+local Window = Rayfield:CreateWindow({
+   Name = "Farm Hub",
+   ToggleUIKeybind = "K",
+})
+
+local Tab = Window:CreateTab("Main", 4483362458)
+
+-- 📌 ตัวละคร
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart")
+
+local npcFolder = workspace:WaitForChild("NPCs")
+local RunService = game:GetService("RunService")
+
+local currentTarget = nil
+local height = 5
+
+-- 🎯 หาเป้าหมาย
+local function getTarget()
+	for _, npc in pairs(npcFolder:GetChildren()) do
+		
+		-- 🔥 fallback กัน nil
+		local targetName = getgenv().Settings.SelectedMonster or "Thief"
+
+		if string.find(npc.Name, targetName) then
+			local hum = npc:FindFirstChildOfClass("Humanoid")
+			if hum and hum.Health > 0 then
+				return npc
+			end
+		end
+	end
+end
+
+-- 🔥 LOOP ฟาร์ม
+RunService.Heartbeat:Connect(function()
+	if not getgenv().Settings.AutoFarm then return end
+
+	if not currentTarget
+	or not currentTarget.Parent
+	or not currentTarget:FindFirstChildOfClass("Humanoid")
+	or currentTarget:FindFirstChildOfClass("Humanoid").Health <= 0 then
+		
+		currentTarget = getTarget()
+	end
+
+	if currentTarget then
+		local head = currentTarget:FindFirstChild("Head")
+		if head then
+			local pos = head.Position + Vector3.new(0, height, 2)
+
+			hrp.AssemblyLinearVelocity = Vector3.zero
+			hrp.AssemblyAngularVelocity = Vector3.zero
+			hrp.CFrame = CFrame.lookAt(pos, head.Position)
+		end
+	end
+end)
+
+-- 🎯 Dropdown
+Tab:CreateDropdown({
+   Name = "Monster",
+   Options = {"Thief", "ThiefBoss"},
+   CurrentOption = {"Thief"},
+   MultipleOptions = false,
+   Flag = "Dropdown1",
+
+   Callback = function(Options)
+      getgenv().Settings.SelectedMonster = Options[1]
+      currentTarget = nil -- รีเป้า
+      print("Selected:", Options[1])
+   end
+})
+
+-- 🔘 Toggle
+Tab:CreateToggle({
+   Name = "Auto Farm",
+   CurrentValue = false,
+   Flag = "AutoFarm",
+
+   Callback = function(Value)
+      getgenv().Settings.AutoFarm = Value
+   end
+})
+
+-- ❌ ปิด GUI
+Tab:CreateButton({
+   Name = "Destroy",
+   Callback = function()
+      Rayfield:Destroy()
+   end
+})
