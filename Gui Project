@@ -1,99 +1,265 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
--- 🌍 GLOBAL (ไม่มีค่าเริ่มต้นแล้ว)
+-- 🌍 GLOBAL
 getgenv().Settings = {
     AutoFarm = false,
     SelectedMonster = nil
 }
+getgenv().AutoSkill = false
+getgenv().AutoEquip = false
+getgenv().AutoBuy = false
 
+-- 🧠 Window + Save Config
 local Window = Rayfield:CreateWindow({
    Name = "Farm Hub",
    ToggleUIKeybind = "K",
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = "FarmHubConfig",
+      FileName = "MainConfig"
+   }
 })
 
-local Tab = Window:CreateTab("Main", 4483362458)
+-- 📑 Tabs
+local MainTab = Window:CreateTab("Main", 4483362458)
+local ShopTab = Window:CreateTab("Shop", 4483362458)
 
 -- 📌 ตัวละคร
 local player = game.Players.LocalPlayer
 local char = player.Character or player.CharacterAdded:Wait()
 local hrp = char:WaitForChild("HumanoidRootPart")
 
+player.CharacterAdded:Connect(function(newChar)
+    char = newChar
+    hrp = char:WaitForChild("HumanoidRootPart")
+end)
+
 local npcFolder = workspace:WaitForChild("NPCs")
 local RunService = game:GetService("RunService")
 
 local currentTarget = nil
 local height = 5
+local distance = 2
 
--- 🎯 หาเป้าหมาย
+-- 🎯 กลุ่มพิเศษ
+local Special = {
+    Thief = {"Thief1","Thief2","Thief3","Thief4","Thief5"},
+    Monkey = {"Monkey1","Monkey2","Monkey3","Monkey4","Monkey5"},
+    DesertBandit = {"DesertBandit1","DesertBandit2","DesertBandit3","DesertBandit4","DesertBandit5"}
+}
+
+-- 🎯 หาเป้า
 local function getTarget()
-	for _, npc in pairs(npcFolder:GetChildren()) do
-		
-		-- 🔥 fallback กัน nil
-		local targetName = getgenv().Settings.SelectedMonster or "Thief"
+    local targetName = getgenv().Settings.SelectedMonster
+    if not targetName then return end
 
-		if string.find(npc.Name, targetName) then
-			local hum = npc:FindFirstChildOfClass("Humanoid")
-			if hum and hum.Health > 0 then
-				return npc
-			end
-		end
-	end
+    for _, npc in pairs(npcFolder:GetChildren()) do
+        local hum = npc:FindFirstChildOfClass("Humanoid")
+        if hum and hum.Health > 0 then
+            if Special[targetName] then
+                if table.find(Special[targetName], npc.Name) then
+                    return npc
+                end
+            else
+                if string.find(npc.Name, targetName) then
+                    return npc
+                end
+            end
+        end
+    end
 end
 
--- 🔥 LOOP ฟาร์ม
+-- 🔥 Auto Farm
 RunService.Heartbeat:Connect(function()
-	if not getgenv().Settings.AutoFarm then return end
+    if not getgenv().Settings.AutoFarm or not hrp then return end
 
-	if not currentTarget
-	or not currentTarget.Parent
-	or not currentTarget:FindFirstChildOfClass("Humanoid")
-	or currentTarget:FindFirstChildOfClass("Humanoid").Health <= 0 then
-		
-		currentTarget = getTarget()
-	end
+    if not currentTarget
+    or not currentTarget.Parent
+    or not currentTarget:FindFirstChildOfClass("Humanoid")
+    or currentTarget:FindFirstChildOfClass("Humanoid").Health <= 0 then
+        
+        currentTarget = getTarget()
+    end
 
-	if currentTarget then
-		local head = currentTarget:FindFirstChild("Head")
-		if head then
-			local pos = head.Position + Vector3.new(0, height, 2)
-
-			hrp.AssemblyLinearVelocity = Vector3.zero
-			hrp.AssemblyAngularVelocity = Vector3.zero
-			hrp.CFrame = CFrame.lookAt(pos, head.Position)
-		end
-	end
+    if currentTarget then
+        local head = currentTarget:FindFirstChild("Head")
+        if head then
+            local targetPos = head.Position + head.CFrame.LookVector * -distance + Vector3.new(0, height, 0)
+            hrp.AssemblyLinearVelocity = Vector3.zero
+            hrp.AssemblyAngularVelocity = Vector3.zero
+            hrp.CFrame = CFrame.lookAt(targetPos, head.Position)
+        end
+    end
 end)
 
 -- 🎯 Dropdown
-Tab:CreateDropdown({
+MainTab:CreateDropdown({
    Name = "Monster",
-   Options = {"Thief", "ThiefBoss"},
-   CurrentOption = {"Thief"},
+   Options = {
+       "Thief","ThiefBoss","Monkey","MonkeyBoss",
+       "DesertBandit","DesertBoss","FrostRogue","SnowBoss",
+       "Sorcerer","StrongSorcerer","PandaMiniBoss",
+       "Hollow","Curse","Slime","AcademyTeacher","Swordsman","Quincy"
+   },
+   CurrentOption = {""},
    MultipleOptions = false,
    Flag = "Dropdown1",
 
    Callback = function(Options)
       getgenv().Settings.SelectedMonster = Options[1]
-      currentTarget = nil -- รีเป้า
-      print("Selected:", Options[1])
+      currentTarget = nil
    end
 })
 
--- 🔘 Toggle
-Tab:CreateToggle({
+-- 🔘 Auto Farm
+MainTab:CreateToggle({
    Name = "Auto Farm",
    CurrentValue = false,
    Flag = "AutoFarm",
-
    Callback = function(Value)
       getgenv().Settings.AutoFarm = Value
    end
 })
 
+-- ⚡ Auto Skill
+MainTab:CreateToggle({
+   Name = "AutoSkill",
+   CurrentValue = false,
+   Flag = "AutoSkill",
+
+   Callback = function(Value)
+      getgenv().AutoSkill = Value
+
+      if Value then
+         task.spawn(function()
+            while getgenv().AutoSkill do
+               game:GetService("ReplicatedStorage").CombatSystem.Remotes.RequestHit:FireServer()
+               task.wait(0.1)
+            end
+         end)
+
+         task.spawn(function()
+            while getgenv().AutoSkill do
+               game:GetService("ReplicatedStorage").AbilitySystem.Remotes.RequestAbility:FireServer(1)
+               game:GetService("ReplicatedStorage").AbilitySystem.Remotes.RequestAbility:FireServer(2)
+               task.wait(0.5)
+            end
+         end)
+      end
+   end,
+})
+
+-- 🎒 Auto Equip
+MainTab:CreateToggle({
+   Name = "Auto Equip",
+   CurrentValue = false,
+   Flag = "AutoEquip",
+
+   Callback = function(Value)
+      getgenv().AutoEquip = Value
+
+      if Value then
+         task.spawn(function()
+            while getgenv().AutoEquip do
+                local backpack = player:WaitForChild("Backpack")
+                if char then
+                    for _, tool in pairs(backpack:GetChildren()) do
+                        if tool:IsA("Tool") then
+                            tool.Parent = char
+                            task.wait(0.2)
+                        end
+                    end
+                end
+                task.wait(5)
+            end
+         end)
+      end
+   end,
+})
+
+-- 🎚️ Height
+MainTab:CreateSlider({
+   Name = "Farm Height",
+   Range = {5, 10},
+   Increment = 1,
+   Suffix = "Studs",
+   CurrentValue = 5,
+   Flag = "HeightSlider",
+   Callback = function(Value)
+      height = tonumber(Value) or 5
+   end,
+})
+
+-- 📜 Quest
+local QuestMap = {
+    Thief = "QuestNPC1", ThiefBoss = "QuestNPC2",
+    Monkey = "QuestNPC3", MonkeyBoss = "QuestNPC4",
+    DesertBandit = "QuestNPC5", DesertBoss = "QuestNPC6",
+    FrostRogue = "QuestNPC7", SnowBoss = "QuestNPC8",
+    Sorcerer = "QuestNPC9", PandaMiniBoss = "QuestNPC10",
+    Hollow = "QuestNPC11", StrongSorcerer = "QuestNPC12",
+    Curse = "QuestNPC13", Slime = "QuestNPC14",
+    AcademyTeacher = "QuestNPC15", Swordsman = "QuestNPC16", Quincy = "QuestNPC17"
+}
+
+MainTab:CreateButton({
+   Name = "GetQuest",
+   Callback = function()
+      local selected = getgenv().Settings.SelectedMonster
+      if not selected then return end
+
+      local remote = game:GetService("ReplicatedStorage").RemoteEvents
+      remote.QuestAbandon:FireServer("repeatable")
+      task.wait(0.3)
+
+      if QuestMap[selected] then
+          remote.QuestAccept:FireServer(QuestMap[selected])
+      end
+   end
+})
+
+-- 🛒 Auto Buy
+ShopTab:CreateToggle({
+   Name = "AutoBuyAll",
+   CurrentValue = false,
+   Flag = "AutoBuyAll",
+
+   Callback = function(Value)
+      getgenv().AutoBuy = Value
+
+      if Value then
+         task.spawn(function()
+            local remote = game:GetService("ReplicatedStorage")
+            .Remotes.MerchantRemotes.PurchaseMerchantItem
+
+            local items = {
+                "Boss Key","Dungeon Key","Race Reroll","Rush Key",
+                "Passive Shard","Trait Reroll","Clan Reroll","Haki Color Reroll"
+            }
+
+            while getgenv().AutoBuy do
+                for _, item in ipairs(items) do
+                    if not getgenv().AutoBuy then break end
+                    pcall(function()
+                        remote:InvokeServer(item, 1)
+                    end)
+                    task.wait(0.6)
+                end
+                task.wait(300)
+            end
+         end)
+      end
+   end,
+})
+
 -- ❌ ปิด GUI
-Tab:CreateButton({
+MainTab:CreateButton({
    Name = "Destroy",
    Callback = function()
       Rayfield:Destroy()
    end
 })
+
+-- 💾 โหลด config
+Rayfield:LoadConfiguration()
